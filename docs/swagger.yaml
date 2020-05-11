@@ -1,0 +1,16 @@
+basePath: /v2
+host: thiagozs.com
+info:
+  contact:
+    email: thiago.zilli@gmail.com
+    name: API Support
+    url: https://thiagozs.com/
+  description: A little server about cats and yours highlights.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: CATAPI
+  version: "1.0"
+paths: {}
+swagger: "2.0"

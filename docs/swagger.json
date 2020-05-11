@@ -1,0 +1,21 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "A little server about cats and yours highlights.",
+        "title": "CATAPI",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "API Support",
+            "url": "https://thiagozs.com/",
+            "email": "thiago.zilli@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0"
+    },
+    "host": "thiagozs.com",
+    "basePath": "/v2",
+    "paths": {}
+}
