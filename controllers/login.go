@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"hostgator-challenge/database"
+	"hostgator-challenge/libs"
 	"hostgator-challenge/models"
 	"net/http"
 	"strconv"
@@ -19,9 +20,15 @@ func CreateLogin(c *gin.Context) {
 		return
 	}
 
+	passwd, err := libs.Encrypt(input.Password)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
 	model := &models.Login{
 		UserName: input.UserName,
-		Password: input.Password,
+		Password: passwd,
 	}
 
 	if err := db.Create(model); err != nil {
@@ -43,7 +50,7 @@ func FindLogin(c *gin.Context) {
 	}
 
 	var login models.Login
-	err = db.FindOne(models.Login{ID: uint(uit)}, &login)
+	err = db.FindOne(models.Login{ID: uit}, &login)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
 		return
