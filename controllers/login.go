@@ -20,15 +20,17 @@ func CreateLogin(c *gin.Context) {
 		return
 	}
 
-	passwd, err := libs.Encrypt(input.Password)
+	pwd := libs.NewPasswordGen()
+	gen, err := pwd.Generate(input.Password)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
+
 	}
 
 	model := &models.Login{
 		UserName: input.UserName,
-		Password: passwd,
+		Password: gen,
 	}
 
 	if err := db.Create(model); err != nil {

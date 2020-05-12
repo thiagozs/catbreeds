@@ -16,6 +16,6 @@
         "version": "1.0"
     },
     "host": "thiagozs.com",
-    "basePath": "/v2",
+    "basePath": "/",
     "paths": {}
 }

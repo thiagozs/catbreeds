@@ -20,6 +20,7 @@ type Server struct {
 	DialectDB  string
 	FileNameDB string
 	DB         *gorm.DB
+	DBI        database.IGormRepo
 }
 
 // NewServer start a new service
@@ -64,11 +65,11 @@ func (sr *Server) StartDB() {
 	dialect.AutoMigrate(sr.Models...)
 
 	// Start a new dialect to Repository
-	db := database.NewGormRepo(dialect)
+	sr.DBI = database.NewGormRepo(dialect)
 
 	// use a context of gin to forward databse settings and conn.
 	sr.Engine.Use(func(c *gin.Context) {
-		c.Set("db", db)
+		c.Set("db", sr.DBI)
 		c.Next()
 	})
 

@@ -1,22 +1,18 @@
 package services
 
 import (
-	"fmt"
-	"net/http"
 	"os"
 
 	"hostgator-challenge/controllers"
 	_ "hostgator-challenge/docs"
 
-	jwt "github.com/appleboy/gin-jwt/v2"
-	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 func (sr *Server) PublicRoutes() {
 
-	auth, err := authMiddleware()
+	auth, err := authMiddleware(sr.DBI)
 	if err != nil {
 		os.Exit(1)
 	}
@@ -37,17 +33,13 @@ func (sr *Server) PublicRoutes() {
 
 func (sr *Server) PrivateRoutes() {
 
-	auth, err := authMiddleware()
+	auth, err := authMiddleware(sr.DBI)
 	if err != nil {
 		os.Exit(1)
 	}
 
 	priv := sr.Engine.Group("/breeds")
 	priv.Use(auth.MiddlewareFunc())
-	priv.GET("/:cat", func(c *gin.Context) {
-		claims := jwt.ExtractClaims(c)
-		fmt.Printf("%#v\n", claims)
-		c.JSON(http.StatusOK, gin.H{"message": "I have jwt!"})
-	})
+	priv.GET("/:cat", controllers.Breeds)
 
 }

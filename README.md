@@ -26,5 +26,3 @@ just run `go run main.go` or `Makefile build` (todo)
 ## Generate docker image
 
 Run `docker build . -t thiagozs/hostgator-challenge` (todo)
-
-##

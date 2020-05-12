@@ -17,6 +17,8 @@ type IGormRepo interface {
 	Update(model IModel) error
 	Delete(model IModel) error
 	FindOne(condition interface{}, model IModel) error
+	GetDB() *gorm.DB
+	InitDB(*gorm.DB) *GormRepo
 }
 
 // GormRepo model
@@ -57,4 +59,9 @@ func (r *GormRepo) Update(model IModel) error {
 func (r *GormRepo) Delete(model IModel) error {
 	fmt.Printf("GormRepo: on Delete model %v \n", model)
 	return r.DB.Delete(model).Error
+}
+
+// GetDB return gorm engine
+func (r *GormRepo) GetDB() *gorm.DB {
+	return r.DB
 }

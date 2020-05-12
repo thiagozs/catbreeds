@@ -1,6 +1,9 @@
 package services
 
 import (
+	"fmt"
+	"hostgator-challenge/database"
+	"hostgator-challenge/libs"
 	"hostgator-challenge/models"
 	"time"
 
@@ -10,7 +13,10 @@ import (
 
 var identityKey = "uuid"
 
-func authMiddleware() (*jwt.GinJWTMiddleware, error) {
+type Authorizator func(data interface{}, c *gin.Context) bool
+type Authenticator func(c *gin.Context) (interface{}, error)
+
+func authMiddleware(db database.IGormRepo) (*jwt.GinJWTMiddleware, error) {
 	return jwt.New(&jwt.GinJWTMiddleware{
 		Realm:           "test zone",
 		Key:             []byte("my secret key"),
@@ -19,8 +25,8 @@ func authMiddleware() (*jwt.GinJWTMiddleware, error) {
 		IdentityKey:     identityKey,
 		PayloadFunc:     payloadFunc,
 		IdentityHandler: identityHandler,
-		Authenticator:   authenticator,
-		Authorizator:    authorizator,
+		Authenticator:   authenticator(db),
+		Authorizator:    authorizator(db),
 		Unauthorized:    unauthorized,
 		TokenLookup:     "header: Authorization, query: token, cookie: jwt",
 		TokenHeadName:   "Bearer",
@@ -35,29 +41,45 @@ func unauthorized(c *gin.Context, code int, message string) {
 	})
 }
 
-func authorizator(data interface{}, c *gin.Context) bool {
-	if v, ok := data.(*models.Login); ok && v.UserName == "admin@gmail.com" {
-		return true
+func authorizator(db database.IGormRepo) Authorizator {
+	return func(data interface{}, c *gin.Context) bool {
+		if v, ok := data.(*models.Login); ok {
+			var login models.Login
+			if err := db.FindOne(models.Login{ID: v.ID}, &login); err != nil {
+				return false
+			}
+			if v.UserName == login.UserName {
+				return true
+			}
+		}
+		return false
 	}
-	return false
 }
 
-func authenticator(c *gin.Context) (interface{}, error) {
-	var loginVals models.Login
-	if err := c.ShouldBind(&loginVals); err != nil {
-		return "", jwt.ErrMissingLoginValues
-	}
-	username := loginVals.UserName
-	password := loginVals.Password
+func authenticator(db database.IGormRepo) Authenticator {
+	return func(c *gin.Context) (interface{}, error) {
+		var loginVals models.Login
+		if err := c.ShouldBind(&loginVals); err != nil {
+			return "", jwt.ErrMissingLoginValues
+		}
 
-	if (username == "admin" && password == "123456") ||
-		(username == "test" && password == "test") {
-		return &models.Login{
-			UserName: username,
-		}, nil
-	}
+		var login models.Login
+		if err := db.FindOne(models.Login{ID: loginVals.ID}, &login); err != nil {
+			return models.Login{}, err
+		}
 
-	return nil, jwt.ErrFailedAuthentication
+		pwd := libs.NewPasswordGen()
+		match, err := pwd.Compare(loginVals.Password, login.Password)
+		if !match || err != nil {
+			fmt.Println("Password Invalid")
+		}
+
+		if loginVals.UserName == login.UserName && match {
+			return &models.Login{UserName: loginVals.UserName}, nil
+		}
+
+		return nil, jwt.ErrFailedAuthentication
+	}
 }
 
 func identityHandler(c *gin.Context) interface{} {

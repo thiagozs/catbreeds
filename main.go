@@ -23,7 +23,7 @@ import (
 // @license.name Apache 2.0
 // @license.url http://www.apache.org/licenses/LICENSE-2.0.html
 
-// @host thiagozs.com
+// @host localhost:8080
 
 // @BasePath /
 func main() {
@@ -32,20 +32,15 @@ func main() {
 
 	fmt.Printf("Start Server %s on port :8080...\n", version)
 	// options...
-	debug := func(srv *services.Server) {
+	opts := func(srv *services.Server) {
 		srv.Debug = true
-	}
-
-	models := func(srv *services.Server) {
-		srv.Models = append(srv.Models, &models.Login{})
-	}
-
-	dbset := func(srv *services.Server) {
 		srv.DialectDB = "sqlite3"
 		srv.FileNameDB = "database.db"
+		srv.Models = append(srv.Models, &models.Login{})
+		srv.Models = append(srv.Models, &models.CatAPI{})
 	}
 
-	srv := services.NewServer(debug, models, dbset)
+	srv := services.NewServer(opts)
 	srv.StartDB()
 	srv.PublicRoutes()
 	srv.PrivateRoutes()
