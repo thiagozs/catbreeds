@@ -194,6 +194,6 @@ Date: Wed, 13 May 2020 06:47:33 GMT
 
 We use SemVer for versioning. You can see the versions available by checking the tags on this repository.
 
-For more details about our license model, please take a look at the [LICENSE](https://github.com/thiagozs/hostgator-challenge/blob/master/LICENSE) file.
+For more details about our license model, please take a look at the [LICENSE](https://github.com/thiagozs/hostgator-challenge/blob/master/LICENCE) file.
 
 **2020, thiagozs**
