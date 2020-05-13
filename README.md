@@ -10,6 +10,7 @@ Here is a list of stack of tech used in this project
 * Jq
 * httpie
 * golangci-lint
+* Github CI
 
 ## Dependencies of project
 
@@ -60,7 +61,7 @@ Step 17/17 : HEALTHCHECK --interval=5s --timeout=2s --start-period=2s --retries=
 
 ## Testing API in easy mode
 
-After started the api, you can acess the endpoint for create/show a **account**, this method you going generate a login with password. At this time you don't need login with a **JWT** token, to create/show. To create your credential follow the staps below.
+After started the api, you can acess the endpoint for create/show a **account**, this method you going generate a login with password. At this time you don't need login with a **JWT** token, to create/show. To create your credential follow the steps below.
 
 ### Create registry (@usernamea and password)
 
@@ -208,5 +209,11 @@ Date: Wed, 13 May 2020 06:47:33 GMT
 We use SemVer for versioning. You can see the versions available by checking the tags on this repository.
 
 For more details about our license model, please take a look at the [LICENSE](https://github.com/thiagozs/hostgator-challenge/blob/master/LICENCE) file
+
+## Little atention
+
+Guys, I would like to say that at the time of the covid-19 crisis, right now I really need that position. The startup I'm currently working on is not doing very well. I have a newborn daughter and my payment is the only one in my house. Pick me! Thanks for all =)
+
+Made with love.
 
 **2020, thiagozs**
