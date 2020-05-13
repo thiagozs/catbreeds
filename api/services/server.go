@@ -10,14 +10,12 @@ import (
 type Option func(sr *Server)
 
 type Server struct {
-	Engine     *gin.Engine
-	Models     []interface{}
-	Port       string
-	Debug      bool
-	DialectDB  string
-	FileNameDB string
-	DB         database.IGormRepo
-	Ctl        controllers.ICtlRepo
+	Engine *gin.Engine
+	Models []interface{}
+	Port   string
+	Debug  bool
+	DB     database.IGormRepo
+	Ctl    controllers.ICtlRepo
 }
 
 // NewServer start a new service

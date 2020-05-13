@@ -49,8 +49,7 @@ func main() {
 	// options server...
 	opts := func(s *services.Server) {
 		s.Debug = false
-		s.Models = append(s.Models, &models.Login{})
-		s.Models = append(s.Models, &models.CatAPI{})
+		s.Models = append(s.Models, &models.CatAPI{}, &models.Login{})
 		s.DB = db
 		s.Ctl = ctl
 	}
