@@ -9,6 +9,7 @@ Here is a list of stack of tech used in this project
 * Sqlite3
 * Jq
 * httpie
+* golangci-lint
 
 ## Dependencies of project
 
@@ -33,6 +34,10 @@ Endpoint for documentation: `http://localhost:8080/swagger/index.html`
 ## Test project
 
 In command line inside folder of project, run `go test ./... -v` or makefile `make test`
+
+## Check lint of code
+
+You need the `golangci-lint`, for the installation I recommend you see the documentation about that. Link for doc [Here](https://github.com/golangci/golangci-lint)
 
 ## Start project
 
