@@ -22,3 +22,6 @@ build:
 
 alpine:
 	GOOS=linux ${GOBUILD}  ${LDFLAGS} -o ${OUTDIR}/${NAME}.lin ${MAIN}
+
+test:
+	go test ./... -v
