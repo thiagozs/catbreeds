@@ -1,0 +1,243 @@
+basePath: /
+definitions:
+  models.CatAPI:
+    properties:
+      adaptability:
+        type: integer
+      affection_level:
+        type: integer
+      alt_names:
+        type: string
+      child_friendly:
+        type: integer
+      country_code:
+        type: string
+      country_codes:
+        type: string
+      createdAt:
+        type: string
+      deletedAt:
+        type: string
+      description:
+        type: string
+      dog_friendly:
+        type: integer
+      energy_level:
+        type: integer
+      experimental:
+        type: integer
+      grooming:
+        type: integer
+      hairless:
+        type: integer
+      health_issues:
+        type: integer
+      hypoallergenic:
+        type: integer
+      id:
+        type: string
+      indoor:
+        type: integer
+      intelligence:
+        type: integer
+      life_span:
+        type: string
+      name:
+        type: string
+      natural:
+        type: integer
+      origin:
+        type: string
+      rare:
+        type: integer
+      rex:
+        type: integer
+      shedding_level:
+        type: integer
+      short_legs:
+        type: integer
+      social_needs:
+        type: integer
+      stranger_friendly:
+        type: integer
+      suppressed_tail:
+        type: integer
+      temperament:
+        type: string
+      updatedAt:
+        type: string
+      vcahospitals_url:
+        type: string
+      vocalisation:
+        type: integer
+      weight:
+        $ref: '#/definitions/models.Weight'
+        type: object
+      wikipedia_url:
+        type: string
+    type: object
+  models.Login:
+    properties:
+      createdAt:
+        type: string
+      deletedAt:
+        type: string
+      id:
+        type: integer
+      password:
+        type: string
+      updatedAt:
+        type: string
+      userName:
+        type: string
+    type: object
+  models.ReqLogin:
+    properties:
+      password:
+        type: string
+      userName:
+        type: string
+    type: object
+  models.Weight:
+    properties:
+      imperial:
+        type: string
+      metric:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: thiago.zilli@gmail.com
+    name: API Support
+    url: https://thiagozs.com
+  description: Simple documentation of API.
+  license:
+    name: Reserved Commons
+    url: https://thiagozs.com/license
+  termsOfService: https://thiagozs.com/terms/
+  title: Codding challenge
+  version: "2.0"
+paths:
+  /:
+    get:
+      consumes:
+      - application/json
+      description: Home for welcome API
+      produces:
+      - application/json
+      summary: Welcome API
+  /account:
+    post:
+      consumes:
+      - application/json
+      description: This method you will create a new Login
+      parameters:
+      - description: Login
+        in: body
+        name: login
+        required: true
+        schema:
+          $ref: '#/definitions/models.ReqLogin'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Login'
+      summary: Create a new Account
+  /account/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get a JSON with search by ID
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.CatAPI'
+      summary: Get information about accounts
+  /breeds/{cat}:
+    get:
+      consumes:
+      - application/json
+      description: Get a JSON with search by name
+      parameters:
+      - description: Cat Name
+        in: path
+        name: cat
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.CatAPI'
+      summary: Get information about breed cats
+  /login:
+    post:
+      consumes:
+      - application/json
+      description: Authorize your account with jwt token
+      parameters:
+      - description: Login
+        in: body
+        name: login
+        required: true
+        schema:
+          $ref: '#/definitions/models.ReqLogin'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Login'
+      summary: Login
+  /login/refresh_token:
+    get:
+      consumes:
+      - application/json
+      description: Get a new fesh token for your account
+      parameters:
+      - description: Login
+        in: body
+        name: login
+        required: true
+        schema:
+          $ref: '#/definitions/models.ReqLogin'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Login'
+      summary: Refesh Token
+  /ping:
+    get:
+      consumes:
+      - application/json
+      description: Test if API are alive
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: pong
+          schema:
+            type: string
+      summary: Ping service
+schemes:
+- http
+swagger: "2.0"

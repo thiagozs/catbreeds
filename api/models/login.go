@@ -2,6 +2,11 @@ package models
 
 import "time"
 
+type ReqLogin struct {
+	UserName string
+	Password string
+}
+
 // Login model
 type Login struct {
 	ID        uint64 `gorm:"primary_key"`

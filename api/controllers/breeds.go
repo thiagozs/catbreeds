@@ -1,35 +1,26 @@
 package controllers
 
 import (
-	"hostgator-challenge/database"
-	"hostgator-challenge/libs"
-	"hostgator-challenge/models"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/thiagozs/hostgator-challenge/api/models"
+	"github.com/thiagozs/hostgator-challenge/libs"
 )
 
-// Breeds godoc
-// @Summary Show a cat information
-// @Description get string by ID
-// @ID get-string-by-int
+// @Summary Get information about breed cats
+// @Description Get a JSON with search by name
 // @Accept  json
 // @Produce  json
-// @Param cat path string true "Cat name"
+// @Param cat path string true "Cat Name"
 // @Success 200 {object} models.CatAPI
-// @Header 200 {string} Token "jwt"
-// @Failure 400 {object} httputil.HTTPError
-// @Failure 404 {object} httputil.HTTPError
-// @Failure 500 {object} httputil.HTTPError
 // @Router /breeds/{cat} [get]
-
-func Breeds(c *gin.Context) {
-	db := c.MustGet("db").(*database.GormRepo)
+func (ctl *CtlRepo) Breeds(c *gin.Context) {
 	key := c.Param("cat")
 
 	var model models.CatAPI
 	var results []models.CatAPI
-	gdb := db.GetDB()
+	gdb := ctl.DB.GetDB()
 	err := gdb.Table(model.TableName()).
 		Where("name LIKE ?", "%"+key+"%").
 		Find(&results).Error
@@ -40,7 +31,7 @@ func Breeds(c *gin.Context) {
 	}
 
 	if len(results) == 0 {
-		data, err := libs.WriteData(db, key)
+		data, err := libs.WriteData(ctl.DB, key)
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return

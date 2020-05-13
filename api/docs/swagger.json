@@ -1,0 +1,369 @@
+{
+    "schemes": [
+        "http"
+    ],
+    "swagger": "2.0",
+    "info": {
+        "description": "Simple documentation of API.",
+        "title": "Codding challenge",
+        "termsOfService": "https://thiagozs.com/terms/",
+        "contact": {
+            "name": "API Support",
+            "url": "https://thiagozs.com",
+            "email": "thiago.zilli@gmail.com"
+        },
+        "license": {
+            "name": "Reserved Commons",
+            "url": "https://thiagozs.com/license"
+        },
+        "version": "2.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/",
+    "paths": {
+        "/": {
+            "get": {
+                "description": "Home for welcome API",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Welcome API"
+            }
+        },
+        "/account": {
+            "post": {
+                "description": "This method you will create a new Login",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Create a new Account",
+                "parameters": [
+                    {
+                        "description": "Login",
+                        "name": "login",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.ReqLogin"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/models.Login"
+                        }
+                    }
+                }
+            }
+        },
+        "/account/{id}": {
+            "get": {
+                "description": "Get a JSON with search by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Get information about accounts",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.CatAPI"
+                        }
+                    }
+                }
+            }
+        },
+        "/breeds/{cat}": {
+            "get": {
+                "description": "Get a JSON with search by name",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Get information about breed cats",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Cat Name",
+                        "name": "cat",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.CatAPI"
+                        }
+                    }
+                }
+            }
+        },
+        "/login": {
+            "post": {
+                "description": "Authorize your account with jwt token",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Login",
+                "parameters": [
+                    {
+                        "description": "Login",
+                        "name": "login",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.ReqLogin"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/models.Login"
+                        }
+                    }
+                }
+            }
+        },
+        "/login/refresh_token": {
+            "get": {
+                "description": "Get a new fesh token for your account",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Refesh Token",
+                "parameters": [
+                    {
+                        "description": "Login",
+                        "name": "login",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.ReqLogin"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Login"
+                        }
+                    }
+                }
+            }
+        },
+        "/ping": {
+            "get": {
+                "description": "Test if API are alive",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Ping service",
+                "responses": {
+                    "200": {
+                        "description": "pong",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.CatAPI": {
+            "type": "object",
+            "properties": {
+                "adaptability": {
+                    "type": "integer"
+                },
+                "affection_level": {
+                    "type": "integer"
+                },
+                "alt_names": {
+                    "type": "string"
+                },
+                "child_friendly": {
+                    "type": "integer"
+                },
+                "country_code": {
+                    "type": "string"
+                },
+                "country_codes": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "dog_friendly": {
+                    "type": "integer"
+                },
+                "energy_level": {
+                    "type": "integer"
+                },
+                "experimental": {
+                    "type": "integer"
+                },
+                "grooming": {
+                    "type": "integer"
+                },
+                "hairless": {
+                    "type": "integer"
+                },
+                "health_issues": {
+                    "type": "integer"
+                },
+                "hypoallergenic": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "indoor": {
+                    "type": "integer"
+                },
+                "intelligence": {
+                    "type": "integer"
+                },
+                "life_span": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "natural": {
+                    "type": "integer"
+                },
+                "origin": {
+                    "type": "string"
+                },
+                "rare": {
+                    "type": "integer"
+                },
+                "rex": {
+                    "type": "integer"
+                },
+                "shedding_level": {
+                    "type": "integer"
+                },
+                "short_legs": {
+                    "type": "integer"
+                },
+                "social_needs": {
+                    "type": "integer"
+                },
+                "stranger_friendly": {
+                    "type": "integer"
+                },
+                "suppressed_tail": {
+                    "type": "integer"
+                },
+                "temperament": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                },
+                "vcahospitals_url": {
+                    "type": "string"
+                },
+                "vocalisation": {
+                    "type": "integer"
+                },
+                "weight": {
+                    "type": "object",
+                    "$ref": "#/definitions/models.Weight"
+                },
+                "wikipedia_url": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.Login": {
+            "type": "object",
+            "properties": {
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                },
+                "userName": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.ReqLogin": {
+            "type": "object",
+            "properties": {
+                "password": {
+                    "type": "string"
+                },
+                "userName": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.Weight": {
+            "type": "object",
+            "properties": {
+                "imperial": {
+                    "type": "string"
+                },
+                "metric": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

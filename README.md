@@ -1,4 +1,4 @@
-# Hostgator challenge
+# Hostgator github.com/thiagozs/hostgator-challenge
 
 ## Stack of tech
 
@@ -25,4 +25,4 @@ just run `go run main.go` or `Makefile build` (todo)
 
 ## Generate docker image
 
-Run `docker build . -t thiagozs/hostgator-challenge` (todo)
+Run `docker build . -t thiagozs/github.com/thiagozs/hostgator-challenge` (todo)

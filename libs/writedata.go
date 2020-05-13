@@ -2,14 +2,15 @@ package libs
 
 import (
 	"encoding/json"
-	"hostgator-challenge/database"
-	"hostgator-challenge/models"
 	"net/url"
+
+	"github.com/thiagozs/hostgator-challenge/api/database"
+	"github.com/thiagozs/hostgator-challenge/api/models"
 
 	"github.com/tidwall/gjson"
 )
 
-func WriteData(db *database.GormRepo, param string) ([]models.CatAPI, error) {
+func WriteData(db database.IGormRepo, param string) ([]models.CatAPI, error) {
 
 	configs := func(cfg *FetchDataConfig) {
 		cfg.URL = "https://api.thecatapi.com/v1/breeds/search"

@@ -1,11 +1,10 @@
-package services
+package libs
 
 import (
-	"fmt"
-	"hostgator-challenge/database"
-	"hostgator-challenge/libs"
-	"hostgator-challenge/models"
 	"time"
+
+	"github.com/thiagozs/hostgator-challenge/api/database"
+	"github.com/thiagozs/hostgator-challenge/api/models"
 
 	jwt "github.com/appleboy/gin-jwt/v2"
 	"github.com/gin-gonic/gin"
@@ -16,7 +15,7 @@ var identityKey = "uuid"
 type Authorizator func(data interface{}, c *gin.Context) bool
 type Authenticator func(c *gin.Context) (interface{}, error)
 
-func authMiddleware(db database.IGormRepo) (*jwt.GinJWTMiddleware, error) {
+func AuthMiddleware(db database.IGormRepo) (*jwt.GinJWTMiddleware, error) {
 	return jwt.New(&jwt.GinJWTMiddleware{
 		Realm:           "test zone",
 		Key:             []byte("my secret key"),
@@ -68,10 +67,10 @@ func authenticator(db database.IGormRepo) Authenticator {
 			return models.Login{}, err
 		}
 
-		pwd := libs.NewPasswordGen()
+		pwd := NewPasswordGen()
 		match, err := pwd.Compare(loginVals.Password, login.Password)
 		if !match || err != nil {
-			fmt.Println("Password Invalid")
+			return models.Login{}, err
 		}
 
 		if loginVals.UserName == login.UserName && match {
