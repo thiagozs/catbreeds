@@ -1,7 +1,7 @@
 package services
 
 import (
-	_ "github.com/thiagozs/hostgator-challenge/api/docs"
+	_ "hostgator-challenge/api/docs"
 
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"

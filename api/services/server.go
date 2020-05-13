@@ -3,8 +3,8 @@ package services
 import (
 	"github.com/gin-gonic/gin"
 
-	"github.com/thiagozs/hostgator-challenge/api/controllers"
-	"github.com/thiagozs/hostgator-challenge/api/database"
+	"hostgator-challenge/api/controllers"
+	"hostgator-challenge/api/database"
 )
 
 type Option func(sr *Server)

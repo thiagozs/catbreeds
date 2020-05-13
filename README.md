@@ -1,4 +1,4 @@
-# Hostgator github.com/thiagozs/hostgator-challenge
+# Hostgator hostgator-challenge
 
 ## Stack of tech
 
@@ -15,14 +15,16 @@ You need install some libs for running this project.
 
 `go get -u github.com/swaggo/swag/cmd/swag`
 
+for update the documentation just run command `cd api/cmd` and after run the swag for find and write a swagger documentation. `swag init -g main.go`
+
 ## Test project
 
 Just run `go test ./... -v` (todo)
 
 ## Start project
 
-just run `go run main.go` or `Makefile build` (todo)
+just run `go run api/cmd/main.go` or `Makefile build` (todo)
 
 ## Generate docker image
 
-Run `docker build . -t thiagozs/github.com/thiagozs/hostgator-challenge` (todo)
+Run `docker build . -t thiagozs/challenge` (todo)

@@ -3,8 +3,8 @@ package libs
 import (
 	"time"
 
-	"github.com/thiagozs/hostgator-challenge/api/database"
-	"github.com/thiagozs/hostgator-challenge/api/models"
+	"hostgator-challenge/api/database"
+	"hostgator-challenge/api/models"
 
 	jwt "github.com/appleboy/gin-jwt/v2"
 	"github.com/gin-gonic/gin"

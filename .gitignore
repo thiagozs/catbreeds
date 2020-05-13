@@ -1,4 +1,5 @@
 infos.txt
 *.db
 .vscode
-mytoken.txt
+*.txt
+out

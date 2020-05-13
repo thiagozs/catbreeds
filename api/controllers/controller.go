@@ -4,10 +4,11 @@ import (
 	"net/http"
 	"os"
 
+	"hostgator-challenge/api/database"
+	"hostgator-challenge/api/libs"
+
 	jwt "github.com/appleboy/gin-jwt/v2"
 	"github.com/gin-gonic/gin"
-	"github.com/thiagozs/hostgator-challenge/api/database"
-	"github.com/thiagozs/hostgator-challenge/libs"
 )
 
 // ICtlRepo base repository

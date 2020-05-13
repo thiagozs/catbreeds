@@ -240,4 +240,9 @@ paths:
       summary: Ping service
 schemes:
 - http
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Bearer
+    type: apiKey
 swagger: "2.0"

@@ -4,9 +4,10 @@ import (
 	"net/http"
 	"strconv"
 
+	"hostgator-challenge/api/libs"
+	"hostgator-challenge/api/models"
+
 	"github.com/gin-gonic/gin"
-	"github.com/thiagozs/hostgator-challenge/api/models"
-	"github.com/thiagozs/hostgator-challenge/libs"
 )
 
 // CreateAccount controller create Account
@@ -62,11 +63,10 @@ func (ctl *CtlRepo) FindAccount(c *gin.Context) {
 	}
 
 	var login models.Login
-	err = ctl.DB.FindOne(models.Login{ID: uit}, &login)
-	if err != nil {
+	if err := ctl.DB.FindOne(models.Login{ID: uit}, &login); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"data": login})
+	c.JSON(http.StatusOK, login)
 }

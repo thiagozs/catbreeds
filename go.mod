@@ -1,4 +1,4 @@
-module github.com/thiagozs/hostgator-challenge
+module hostgator-challenge
 
 go 1.14
 
@@ -10,13 +10,14 @@ require (
 	github.com/go-openapi/swag v0.19.9 // indirect
 	github.com/jinzhu/gorm v1.9.12
 	github.com/mailru/easyjson v0.7.1 // indirect
-	github.com/stretchr/testify v1.4.0
+	github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e // indirect
+	github.com/stretchr/testify v1.5.1
 	github.com/swaggo/files v0.0.0-20190704085106-630677cd5c14
 	github.com/swaggo/gin-swagger v1.2.0
 	github.com/swaggo/swag v1.6.5
-	github.com/tidwall/gjson v1.3.5
-	golang.org/x/crypto v0.0.0-20200320181102-891825fb96df
+	github.com/tidwall/gjson v1.6.0
+	golang.org/x/crypto v0.0.0-20200510223506-06a226fb4e37
 	golang.org/x/net v0.0.0-20200506145744-7e3656a0809f // indirect
-	golang.org/x/tools v0.0.0-20200509030707-2212a7e161a5 // indirect
-	gopkg.in/check.v1 v1.0.0-20190902080502-41f04d3bba15 // indirect
+	golang.org/x/tools v0.0.0-20200513022744-65e69ff2d148 // indirect
+	gopkg.in/check.v1 v1.0.0-20200227125254-8fa46927fb4f // indirect
 )

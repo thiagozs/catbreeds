@@ -5,11 +5,11 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/thiagozs/hostgator-challenge/api/controllers"
-	"github.com/thiagozs/hostgator-challenge/api/database"
-	_ "github.com/thiagozs/hostgator-challenge/api/docs"
-	"github.com/thiagozs/hostgator-challenge/api/models"
-	"github.com/thiagozs/hostgator-challenge/api/services"
+	"hostgator-challenge/api/controllers"
+	"hostgator-challenge/api/database"
+	_ "hostgator-challenge/api/docs"
+	"hostgator-challenge/api/models"
+	"hostgator-challenge/api/services"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
@@ -30,10 +30,12 @@ import (
 // @host localhost:8080
 // @schemes http
 // @BasePath /
-
+// @securityDefinitions.apikey ApiKeyAuth
+// @in header
+// @name Bearer
 func main() {
 
-	var version string = "1.0.0"
+	version := "1.0.0"
 	fmt.Printf("Start Server %s on port :8080...\n", version)
 
 	d, err := gorm.Open("sqlite3", filepath.Base("database.db"))
@@ -46,7 +48,7 @@ func main() {
 
 	// options server...
 	opts := func(s *services.Server) {
-		s.Debug = true
+		s.Debug = false
 		s.Models = append(s.Models, &models.Login{})
 		s.Models = append(s.Models, &models.CatAPI{})
 		s.DB = db

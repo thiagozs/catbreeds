@@ -3,9 +3,10 @@ package controllers
 import (
 	"net/http"
 
+	"hostgator-challenge/api/libs"
+	"hostgator-challenge/api/models"
+
 	"github.com/gin-gonic/gin"
-	"github.com/thiagozs/hostgator-challenge/api/models"
-	"github.com/thiagozs/hostgator-challenge/libs"
 )
 
 // @Summary Get information about breed cats

@@ -365,5 +365,12 @@
                 }
             }
         }
+    },
+    "securityDefinitions": {
+        "ApiKeyAuth": {
+            "type": "apiKey",
+            "name": "Bearer",
+            "in": "header"
+        }
     }
 }
