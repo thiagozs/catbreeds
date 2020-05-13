@@ -8,7 +8,7 @@ import "github.com/gin-gonic/gin"
 // @Produce  json
 // @Router / [get]
 func (ctl *CtlRepo) Welcome(c *gin.Context) {
-	c.JSON(200, map[string]string{"message": "Welcome to code github.com/thiagozs/hostgator-challenger hostgator"})
+	c.JSON(200, map[string]string{"message": "Welcome to code challenge hostgator"})
 }
 
 // @Summary Ping service

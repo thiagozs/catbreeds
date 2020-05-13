@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"net/http"
 	"os"
 
 	jwt "github.com/appleboy/gin-jwt/v2"
@@ -20,6 +21,7 @@ type ICtlRepo interface {
 	RefreshHandler() func(c *gin.Context)
 	LoginHandler() func(c *gin.Context)
 	MiddlewareFunc() gin.HandlerFunc
+	NoRoute(c *gin.Context)
 }
 
 // CtlRepo struct
@@ -39,4 +41,9 @@ func (ctl *CtlRepo) GetJwt() *jwt.GinJWTMiddleware {
 		os.Exit(1)
 	}
 	return ajwt
+}
+
+// NoRoute show 404 when not have a endpoint
+func (ctl *CtlRepo) NoRoute(c *gin.Context) {
+	c.JSON(http.StatusNotFound, gin.H{"code": http.StatusNotFound, "message": "Page not found"})
 }

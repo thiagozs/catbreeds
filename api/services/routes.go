@@ -9,6 +9,8 @@ import (
 
 func (s *Server) PublicRoutes() {
 
+	s.Engine.NoRoute(s.Ctl.NoRoute)
+
 	s.Engine.GET("/", s.Ctl.Welcome)
 	s.Engine.GET("/ping", s.Ctl.Ping)
 	s.Engine.GET("/swagger/*any",
