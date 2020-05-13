@@ -5,9 +5,13 @@ import (
 	"os"
 
 	"hostgator-challenge/api/database"
-	"hostgator-challenge/api/libs"
+
+	mid "hostgator-challenge/api/middlewares"
 
 	jwt "github.com/appleboy/gin-jwt/v2"
+
+	ttl "github.com/codebear4/ttlcache"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -27,17 +31,19 @@ type ICtlRepo interface {
 
 // CtlRepo struct
 type CtlRepo struct {
-	DB database.IGormRepo
+	DB    database.IGormRepo
+	Cache *ttl.Cache
 }
 
 // NewCtlRepo new repository
 func NewCtlRepo(db database.IGormRepo) ICtlRepo {
-	return &CtlRepo{db}
+	cache := ttl.NewCache()
+	return &CtlRepo{DB: db, Cache: cache}
 }
 
 // GetJwt auth middleware
 func (ctl *CtlRepo) GetJwt() *jwt.GinJWTMiddleware {
-	ajwt, err := libs.AuthMiddleware(ctl.DB)
+	ajwt, err := mid.AuthJWT(ctl.DB)
 	if err != nil {
 		os.Exit(1)
 	}

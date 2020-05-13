@@ -3,6 +3,8 @@ package services
 import (
 	_ "hostgator-challenge/api/docs"
 
+	mid "hostgator-challenge/api/middlewares"
+
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
@@ -30,6 +32,9 @@ func (s *Server) PrivateRoutes() {
 
 	priv := s.Engine.Group("/breeds")
 	priv.Use(s.Ctl.MiddlewareFunc())
-	priv.GET("/:cat", s.Ctl.Breeds)
+	priv.Use(mid.Limiter())
+	{
+		priv.GET("/:cat", s.Ctl.Breeds)
+	}
 
 }

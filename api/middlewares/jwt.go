@@ -1,9 +1,10 @@
-package libs
+package middlewares
 
 import (
 	"time"
 
 	"hostgator-challenge/api/database"
+	"hostgator-challenge/api/libs"
 	"hostgator-challenge/api/models"
 
 	jwt "github.com/appleboy/gin-jwt/v2"
@@ -15,7 +16,9 @@ var identityKey = "uuid"
 type Authorizator func(data interface{}, c *gin.Context) bool
 type Authenticator func(c *gin.Context) (interface{}, error)
 
-func AuthMiddleware(db database.IGormRepo) (*jwt.GinJWTMiddleware, error) {
+// AuthJWT return a instance for token system
+func AuthJWT(db database.IGormRepo) (*jwt.GinJWTMiddleware, error) {
+
 	return jwt.New(&jwt.GinJWTMiddleware{
 		Realm:           "test zone",
 		Key:             []byte("my secret key"),
@@ -67,7 +70,7 @@ func authenticator(db database.IGormRepo) Authenticator {
 			return models.Login{}, err
 		}
 
-		pwd := NewPasswordGen()
+		pwd := libs.NewPasswordGen()
 		match, err := pwd.Compare(loginVals.Password, login.Password)
 		if !match || err != nil {
 			return models.Login{}, err

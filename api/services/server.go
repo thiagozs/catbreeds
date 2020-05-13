@@ -5,6 +5,7 @@ import (
 
 	"hostgator-challenge/api/controllers"
 	"hostgator-challenge/api/database"
+	mid "hostgator-challenge/api/middlewares"
 )
 
 type Option func(sr *Server)
@@ -37,7 +38,7 @@ func NewServer(opts ...Option) *Server {
 	r := gin.New()
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
-	r.Use(corsMiddleware())
+	r.Use(mid.Cors())
 
 	// Set Gin engine
 	s.Engine = r
