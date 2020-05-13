@@ -50,14 +50,23 @@ For create a image with **Docker-CE** just running in folder of projet the comma
 
 Runing the image after build `sudo docker run --rm --name=challenge --publish=8080:8080 thiagozs/challenge:latest`
 
+## Docker Healthcheck
+
+On the construction of image we have a change to put a little **healtcheck** on API.
+
+```sh
+Step 17/17 : HEALTHCHECK --interval=5s --timeout=2s --start-period=2s --retries=5 CMD [ "curl", "--silent", "--fail", "http://localhost:8080/ping" ]
+```
+
 ## Testing API in easy mode
 
-After started the api, you can acess the endpoint for create/show a **account**, this method you going generate a login with password. At this time you don't need login with a **jwt** token, to create/show. To create your credential run this command.
+After started the api, you can acess the endpoint for create/show a **account**, this method you going generate a login with password. At this time you don't need login with a **JWT** token, to create/show. To create your credential follow the staps below.
 
-### Create registry
+### Create registry (@usernamea and password)
 
 In your terminal: `http post http://localhost:8080/account username=thiagozs password=123`
-```
+
+```sh
 HTTP/1.1 201 Created
 Access-Control-Allow-Credentials: true
 Access-Control-Allow-Headers: Origin, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization
@@ -81,11 +90,11 @@ Date: Wed, 13 May 2020 06:41:51 GMT
 }
 ```
 
-### Get the registry
+### Show a registry inside DB
 
 In your terminal: `http get http://localhost:8080/account/1`
 
-```
+```sh
 HTTP/1.1 200 OK
 Access-Control-Allow-Credentials: true
 Access-Control-Allow-Headers: Origin, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization
@@ -108,11 +117,11 @@ Date: Wed, 13 May 2020 06:42:32 GMT
 
 ```
 
-### Login with your username and get jwt token
+### Login with your @username and get JWT token
 
 In you terminal: `http post http://localhost:8080/login username=thiagozs password=123 | jq -r .token > mytoken.txt`
 
-```
+```sh
 HTTP/1.1 200 OK
 Access-Control-Allow-Credentials: true
 Access-Control-Allow-Headers: Origin, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization
@@ -131,12 +140,11 @@ Date: Wed, 13 May 2020 06:46:13 GMT
 }
 ```
 
-### Cosume the endpoint with need a token for access
+### Cosume the endpoint with JWT token
 
 In your terminal: `http --auth-type=jwt --auth="$(cat mytoken.txt)" get http://localhost:8080/breeds/ango`
 
-```
-
+```sh
 HTTP/1.1 200 OK
 Access-Control-Allow-Credentials: true
 Access-Control-Allow-Headers: Origin, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization
@@ -199,6 +207,6 @@ Date: Wed, 13 May 2020 06:47:33 GMT
 
 We use SemVer for versioning. You can see the versions available by checking the tags on this repository.
 
-For more details about our license model, please take a look at the [LICENSE](https://github.com/thiagozs/hostgator-challenge/blob/master/LICENCE) file.
+For more details about our license model, please take a look at the [LICENSE](https://github.com/thiagozs/hostgator-challenge/blob/master/LICENCE) file
 
 **2020, thiagozs**

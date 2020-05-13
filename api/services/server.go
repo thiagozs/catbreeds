@@ -53,7 +53,7 @@ func (s *Server) MigrationDB() {
 
 func (s *Server) Run() error {
 	// forward runner
-	return s.Engine.Run()
+	return s.Engine.Run(s.Port)
 }
 
 func (s *Server) Stop() {

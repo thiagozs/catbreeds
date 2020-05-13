@@ -48,6 +48,7 @@ func main() {
 
 	// options server...
 	opts := func(s *services.Server) {
+		s.Port = ":8080"
 		s.Debug = false
 		s.Models = append(s.Models, &models.CatAPI{}, &models.Login{})
 		s.DB = db
