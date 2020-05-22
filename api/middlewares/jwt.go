@@ -3,9 +3,9 @@ package middlewares
 import (
 	"time"
 
-	"hostgator-challenge/api/database"
-	"hostgator-challenge/api/libs"
-	"hostgator-challenge/api/models"
+	"catbreeds/api/database"
+	"catbreeds/api/libs"
+	"catbreeds/api/models"
 
 	jwt "github.com/appleboy/gin-jwt/v2"
 	"github.com/gin-gonic/gin"

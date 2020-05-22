@@ -4,9 +4,9 @@ import (
 	"net/http"
 	"os"
 
-	"hostgator-challenge/api/database"
+	"catbreeds/api/database"
 
-	mid "hostgator-challenge/api/middlewares"
+	mid "catbreeds/api/middlewares"
 
 	jwt "github.com/appleboy/gin-jwt/v2"
 

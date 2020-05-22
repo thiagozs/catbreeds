@@ -3,9 +3,9 @@ package services
 import (
 	"github.com/gin-gonic/gin"
 
-	"hostgator-challenge/api/controllers"
-	"hostgator-challenge/api/database"
-	mid "hostgator-challenge/api/middlewares"
+	"catbreeds/api/controllers"
+	"catbreeds/api/database"
+	mid "catbreeds/api/middlewares"
 )
 
 type Option func(sr *Server)

@@ -1,18 +1,24 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"os"
 	"path/filepath"
 
-	"hostgator-challenge/api/controllers"
-	"hostgator-challenge/api/database"
-	_ "hostgator-challenge/api/docs"
-	"hostgator-challenge/api/models"
-	"hostgator-challenge/api/services"
+	"catbreeds/api/controllers"
+	"catbreeds/api/database"
+	_ "catbreeds/api/docs"
+	"catbreeds/api/models"
+	"catbreeds/api/services"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
+)
+
+var (
+	port  = flag.String("p", ":8080", "default port for api")
+	debug = flag.Bool("d", false, "log debug is on or off")
 )
 
 // @title Codding challenge
@@ -35,8 +41,10 @@ import (
 // @name Bearer
 func main() {
 
+	flag.Parse()
+
 	version := "1.0.0"
-	fmt.Printf("Start Server %s on port :8080...\n", version)
+	fmt.Printf("Start Server v%s on port %s...\n", version, *port)
 
 	d, err := gorm.Open("sqlite3", filepath.Base("database.db"))
 	if err != nil {
@@ -48,8 +56,8 @@ func main() {
 
 	// options server...
 	opts := func(s *services.Server) {
-		s.Port = ":8080"
-		s.Debug = false
+		s.Port = *port
+		s.Debug = *debug
 		s.Models = append(s.Models, &models.CatAPI{}, &models.Login{})
 		s.DB = db
 		s.Ctl = ctl

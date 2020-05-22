@@ -1,4 +1,4 @@
-module hostgator-challenge
+module catbreeds
 
 go 1.14
 

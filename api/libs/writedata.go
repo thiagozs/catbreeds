@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"net/url"
 
-	"hostgator-challenge/api/database"
-	"hostgator-challenge/api/models"
+	"catbreeds/api/database"
+	"catbreeds/api/models"
 
 	"github.com/tidwall/gjson"
 )

@@ -1,8 +1,8 @@
 package middlewares
 
 import (
+	"catbreeds/api/models"
 	"fmt"
-	"hostgator-challenge/api/models"
 	"net/http"
 	"time"
 

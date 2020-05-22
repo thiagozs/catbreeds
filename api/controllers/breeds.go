@@ -3,8 +3,8 @@ package controllers
 import (
 	"net/http"
 
-	"hostgator-challenge/api/libs"
-	"hostgator-challenge/api/models"
+	"catbreeds/api/libs"
+	"catbreeds/api/models"
 
 	"github.com/gin-gonic/gin"
 )

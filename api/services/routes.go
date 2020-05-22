@@ -1,9 +1,9 @@
 package services
 
 import (
-	_ "hostgator-challenge/api/docs"
+	_ "catbreeds/api/docs"
 
-	mid "hostgator-challenge/api/middlewares"
+	mid "catbreeds/api/middlewares"
 
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"

@@ -12,8 +12,8 @@ import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
 
-	"hostgator-challenge/api/database"
-	"hostgator-challenge/api/models"
+	"catbreeds/api/database"
+	"catbreeds/api/models"
 
 	"github.com/stretchr/testify/assert"
 )
