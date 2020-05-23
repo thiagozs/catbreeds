@@ -16,7 +16,7 @@ func WriteData(db database.IGormRepo, param string) ([]models.CatAPI, error) {
 		//FIXME: Attention! hard code! Just for purpose of challenge.
 		cfg.URL = "https://api.thecatapi.com/v1/breeds/search"
 		//FIXME: Attention! hard code! Just for purpose of challenge.
-		cfg.TokenHeader = "2f3a8279-8e3f-482b-867d-1315d2b22c6f"
+		cfg.TokenHeader = ""
 		cfg.TimeOut = 40
 	}
 
